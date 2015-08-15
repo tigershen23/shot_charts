@@ -80,8 +80,19 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
 
     return ax
 
+import urllib.request
+# we pass in the link to the image as the 1st argument
+# the 2nd argument tells urlretrieve what we want to scrape
+pic = urllib.request.urlretrieve("http://stats.nba.com/media/players/230x185/201935.png",
+                                "201935.png")
+
+# urlretrieve returns a tuple with our image as the first
+# element and imread reads in the image as a
+# mutlidimensional numpy array so matplotlib can plot it
+harden_pic = plt.imread(pic[0])
+
 joint_shot_chart = sns.jointplot(shot_df.LOC_X, shot_df.LOC_Y, stat_func=None,
-                                 kind='scatter', space=0, alpha=0.5)
+                                kind='scatter', space=0, alpha=0.5)
 joint_shot_chart.fig.set_size_inches(12, 11)
 
 # Draw court onto ax_joint of joint plot
@@ -99,5 +110,5 @@ ax.tick_params(labelbottom='off', labelleft='off')
 ax.set_title('James Harden FGA \n2014-2015 Reg. Season', y=1.2, fontsize=18)
 ax.text(-250, 420, 'Data Source: stats.nba.com'
         '\nAuthor: Tiger Shen', fontsize=12)
-plt.tight_layout()
+
 plt.show()
