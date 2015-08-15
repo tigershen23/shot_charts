@@ -45,18 +45,34 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
     restricted_area = Arc((0, 0), 80, 80, theta1=0, theta2=180, linewidth=lw, color=color)
 
     right_corner_three_line = Rectangle((-220, -47.5), 0, 140, linewidth=lw, color=color)
-    left_corner_three_line = Rectange((220, -47.5), 0, 140, linewidth=lw, color=color)
+    left_corner_three_line = Rectangle((220, -47.5), 0, 140, linewidth=lw, color=color)
 
     three_arc = Arc((0, 0), 475, 475, theta1=22, theta2=158, linewidth=lw, color=color)
 
     center_court_outer_arc = Arc((0, 395), 120, 120, theta1=180, theta2=0,
                                     linewidth=lw, color=color)
-    # center_court_inner_arc =
+    center_court_inner_arc = Arc((0, 395), 40, 40, theta1=180, theta2=0,
+                                    linewidth=lw, color=color)
 
-    court_elements = [hoop, backboard, outer_box]
+    court_elements = [
+                        hoop,
+                        backboard,
+                        key_outer_box,
+                        key_inner_box,
+                        free_throw_top_arc,
+                        free_throw_bottom_arc,
+                        restricted_area,
+                        right_corner_three_line,
+                        left_corner_three_line,
+                        three_arc,
+                        center_court_outer_arc,
+                        center_court_inner_arc
+                     ]
 
-    # if outer_lines:
+    if outer_lines:
         # Draw half-court line, baseline, sidelines
+        boundaries = Rectangle((-250, -47.5), 500, 442.5, linewidth=lw, color=color, fill=False)
+        court_elements.append(boundaries)
 
     # Draw elements
     for element in court_elements:
