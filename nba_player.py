@@ -21,9 +21,9 @@ shots = response.json()['resultSets'][0]['rowSet']
 
 # Create pandas DataFrame from shots
 shot_df = pd.DataFrame(shots, columns=headers)
-from IPython.display import display
-with pd.option_context('display.max_columns', None):
-    display(shot_df.head())
+# from IPython.display import display
+# with pd.option_context('display.max_columns', None):
+#     display(shot_df.head())
 
 sns.set_style("white")
 sns.set_color_codes()
