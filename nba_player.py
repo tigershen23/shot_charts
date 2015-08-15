@@ -17,4 +17,10 @@ shot_chart_url = 'http://stats.nba.com/stats/shotchartdetail?CFID=33&CFPAR'\
 # Get data from URL
 response = requests.get(shot_chart_url)
 headers = response.json()['resultSets'][0]['headers']
-shots = response.json()['resultSets'][9]['rowSet']
+shots = response.json()['resultSets'][0]['rowSet']
+
+# Create pandas DataFrame from shots
+shot_df = pd.DataFrame(shots, columns=headers)
+from IPython.display import display
+with pd.option_context('display.max_columns', None):
+    display(shot_df.head())
