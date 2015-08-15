@@ -80,11 +80,24 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
 
     return ax
 
-sns.set_style("white")
-sns.set_color_codes()
-plt.figure(figsize=(12,11))
-plt.scatter(shot_df.LOC_X, shot_df.LOC_Y)
-draw_court(outer_lines=True)
-plt.xlim(250, -250)
-plt.ylim(395, -47.5)
+joint_shot_chart = sns.jointplot(shot_df.LOC_X, shot_df.LOC_Y, stat_func=None,
+                                 kind='scatter', space=0, alpha=0.5)
+joint_shot_chart.fig.set_size_inches(12, 11)
+
+# Draw court onto ax_joint of joint plot
+ax = joint_shot_chart.ax_joint
+draw_court(ax)
+
+ax.set_xlim(250, -250)
+ax.set_ylim(395, -47.5)
+
+# Remove labels and ticks
+ax.set_xlabel('')
+ax.set_ylabel('')
+ax.tick_params(labelbottom='off', labelleft='off')
+
+ax.set_title('James Harden FGA \n2014-2015 Reg. Season', y=1.2, fontsize=18)
+ax.text(-250, 420, 'Data Source: stats.nba.com'
+        '\nAuthor: Tiger Shen', fontsize=12)
+plt.tight_layout()
 plt.show()
